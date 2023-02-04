@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\ForgotPSWD\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,6 @@ Route::group(['prefix' => 'admin','middleware' => 'adminauth'], function () {
 Route::group(['prefix' => 'manager','middleware' => 'managerauth'], function () {
     Route::get('view/myinfo',[ManagerController::class,'ViewMyInfo']);
 });
+
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('forgot/password', [ForgotPasswordController::class, 'ForgotPassword']);
