@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class ManagerAuth
+class UserAuth
 {
     /**
      * Handle an incoming request.
@@ -15,9 +14,11 @@ class ManagerAuth
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next,$guard = null)
+   
+
+    public function handle(Request $request, Closure $next,$gaurd=null)
     {
-         if (Auth::guard('manager')->guest()) {
+         if (Auth::guard('user')->guest()) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response()->json([
                     'Error'=>'Unauthorized.'],401);
